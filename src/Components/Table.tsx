@@ -1,26 +1,25 @@
 import React, { useEffect } from "react"
 import '../index.css'
 import { useSelector } from "react-redux"
-import { RootState } from "../state"
-import { useMissionDispatch, viewAllMissions } from '../state/missions'
+import { RootState,useAppDispatch } from "../state"
+import { getAllMissions,viewMission,deleteMission } from '../state/missions'
 
 const Table = () => {
-  const dispatch = useMissionDispatch()
-  const {loading,editing} = useSelector((state:RootState) => state.mission)
+  const dispatch = useAppDispatch()
+  const {editing} = useSelector((state:RootState) => state.mission)
   const list = useSelector((state:RootState) => 
     editing?
     state.mission.list.filter(x=>x.id!==state.mission.item.id):
     state.mission.list)
 
   useEffect(()=>{
-    dispatch(viewAllMissions())
+    dispatch(getAllMissions())
   },[])
 
   return (
-    loading?<>Loading...</>:
     <div className="table-responsive">
       <table className="table">
-      <caption>List of tasks</caption>
+      <caption>List of missions</caption>
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -42,8 +41,8 @@ const Table = () => {
         <td>{x.createdBy}</td>
         {editing?<></>:
         <td className="row">
-          <button type="submit" className="btn btn-primary">Edit</button>
-          <button type="submit" className="btn btn-primary">Delete</button>
+          <button onClick={()=>dispatch(viewMission({id:x.id}))} type="submit" className="btn btn-primary">Edit</button>
+          <button onClick={()=>dispatch(deleteMission({id:x.id}))} type="submit" className="btn btn-primary">Delete</button>
         </td>}
         </tr>    
       ))

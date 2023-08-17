@@ -1,12 +1,14 @@
 import React from "react"
 import '../index.css'
 import { useSelector } from "react-redux"
-import { RootState } from "../state"
+import { RootState, useAppDispatch } from "../state"
+import { submitMission, updateMission,cancelMission } from "../state/missions"
 
 const Form = () => {
   
   const editing = useSelector((state:RootState) => state.mission.editing)
   const item = useSelector((state:RootState) => state.mission.item)
+  const dispatch = useAppDispatch()
 
   return (
     editing?
@@ -17,13 +19,18 @@ const Form = () => {
           <label htmlFor="title">Title</label>
           </div>
           <div className="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-          <input disabled={!editing} value={item.title} type="string" className="form-control" id="title" aria-describedby="title" placeholder="Title of the mission"/>
+          <input value={item.title} onChange={(e)=>dispatch(updateMission({key:'title',value:e.currentTarget.value}))} type="string" className="form-control" id="title" aria-describedby="title" placeholder="Title of the mission"/>
           <small id="titleHelp" className="form-text text-muted">What is the title?</small>
           </div>
     </div>
     <div className="row">
-      <button type="submit" className="btn btn-primary col-sm-2 col-md-2 col-lg-2 col-xl-2">Submit</button>      
-      <button type="submit" className="btn btn-primary col-sm-2 col-md-2 col-lg-2 col-xl-2">Cancel</button>
+      <button type="submit" onClick={(e)=>{
+        e.preventDefault()
+        dispatch(submitMission())
+      }} className="btn btn-primary col-sm-2 col-md-2 col-lg-2 col-xl-2">Submit</button>      
+      <button type="submit" onClick={(e)=>{
+        e.preventDefault()
+        dispatch(cancelMission())}} className="btn btn-primary col-sm-2 col-md-2 col-lg-2 col-xl-2">Cancel</button>
     </div>
     </form>
     </>

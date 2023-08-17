@@ -5,11 +5,11 @@ import { RootState } from '../state'
 
 const Snackbar:React.FC=()=>{
   
-  const error = useSelector((state:RootState) => state.mission.editing)
+  const info = useSelector((state:RootState) => state.mission.info)
 
   return (
-    <div className={(error?'bg-danger':'bg-info') + ' sticky-top text-white text-center mx-auto'}>
-          {error?error:'Have fun on Mars!'}
+    <div className={(info?'bg-info text-white':'bg-light') + ' sticky-top text-center mx-auto'}>
+          {info?info:'Have fun on Mars!'}
     </div>          
   )
 }

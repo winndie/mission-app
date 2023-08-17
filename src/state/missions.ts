@@ -1,8 +1,4 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import {AppDispatch} from './index'
-import { useDispatch } from 'react-redux'
-
-export const useMissionDispatch = () => useDispatch<AppDispatch>()
 
 export interface IPayloadAction {
   id?:number,
@@ -20,95 +16,85 @@ export interface IMission {
 export const missionSlice = createSlice({
   name: 'missions',
   initialState: {
-    loading: false,
+    info: undefined as string|undefined,
     editing: false,
-    error: undefined as string|undefined,
     item: {} as IMission,
     list: [] as IMission[]
   },
   reducers: {
     viewMission: (state, action:PayloadAction<IPayloadAction>) => {
-      try{
-        state.loading = true
-        state.error = undefined
+      if(action.payload.id===0)
+      {
         state.editing = true
-        state.item = state.list.find(x=>x.id===action.payload.id)??{id:0} as IMission
-      }catch(e){
-        state.error = String(e)
-      }finally{
-        state.loading = false
+        state.info = 'Adding new mission...'
+        state.item = {
+          id:0,
+          title:'',
+          description:'',
+          createdBy:''
+        } as IMission
+      }else{
+        const item = state.list.find(x=>x.id===action.payload.id)
+        if(item)
+        {
+          state.editing = true
+          state.info = 'Editing mission #'+item.id
+          state.item = item  
+        }
       }
-    },
+  },
     updateMission: (state, action:PayloadAction<IPayloadAction>) => {
       if(action.payload.key && action.payload.value)
         state.item = {...state.item,[action.payload.key]:action.payload.value} as IMission
     },
-    submitMission: (state, action:PayloadAction<IPayloadAction>) => {
-      try{
-        state.loading = true
-        state.error = undefined
-        state.list = state.item.id>0?
-          state.list.map(x=>x.id===state.item.id?state.item:x):
-          state.list.concat({...state.item,id:state.list.length+1})
-      }catch(e){
-        state.error = String(e)
-      }finally{
-        state.loading = false
-        state.editing = false
-        state.item = {} as IMission
-      }
+    cancelMission: (state) => {
+      state.editing = false
+      state.item = {id:0} as IMission
+      state.info = undefined
     },
+    submitMission: (state) => {
+      if(state.item.id === 0)
+      {
+        state.list = [...state.list,{...state.item,id:state.list.length+1}]
+      }else{
+        state.list = state.list.map(x=>x.id===state.item.id?state.item:x)            
+      }
+      state.editing = false
+      state.item = {id:0} as IMission
+      state.info = undefined
+  },
     deleteMission: (state, action:PayloadAction<IPayloadAction>) => {
-      try{
-        state.loading = true
-        state.error = undefined
-        state.editing = false
-        state.list = state.list.filter(x=>x.id!==action.payload.id)
-      }catch(e){
-        state.error = String(e)
-      }finally{
-        state.loading = false
-      }
-    },
-    viewAllMissions: (state) => {
-      try{
-        state.loading = true
-        state.error = undefined
-        state.editing = false
-        state.list = [
-          {id: 1,
-          title: 'Go to Mars',
-          description: 'Find a rabbit',
-          createdBy: '@mars_man',},
-          {id: 2,
-            title: 'Land on Mars',
-            description: 'Fly the Union Flag',
-            createdBy: '@mars_lady',},
-          {id: 3,
-            title: 'Tour around Mars',
-            description: 'Get lucky!',
-            createdBy: '@oh_boy',},
-        ]
-
-      }catch(e){
-        state.error = String(e)
-      }finally{
-        state.loading = false
-      }
-    },
-    deleteAllMissions: (state, action:PayloadAction<IPayloadAction>) => {
-      try{
-        state.loading = true
-        state.error = undefined
-        state.editing = false
+      state.list = state.list.filter(x=>x.id!==action.payload.id)
+  },
+    getAllMissions: (state) => {
+      state.editing = false
+      state.list = [
+        {id: 1,
+        title: 'Go to Mars',
+        description: 'Find a rabbit',
+        createdBy: '@mars_man',},
+        {id: 2,
+          title: 'Land on Mars',
+          description: 'Fly the Union Flag',
+          createdBy: '@mars_lady',},
+        {id: 3,
+          title: 'Tour around Mars',
+          description: 'Get lucky!',
+          createdBy: '@oh_boy',},
+      ]
+  },
+    deleteAllMissions: (state) => {
+      state.editing = false
       state.list = []
-      }catch(e){
-        state.error = String(e)
-      }finally{
-        state.loading = false
-      }
     },
   },
 })
 
-export const {viewMission,updateMission,submitMission,deleteMission,viewAllMissions,deleteAllMissions} = missionSlice.actions
+export const {
+  viewMission,
+  updateMission,
+  cancelMission,
+  submitMission,
+  deleteMission,
+  getAllMissions,
+  deleteAllMissions} = missionSlice.actions
