@@ -1,11 +1,5 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 
-export interface IPayloadAction {
-  id?:number,
-  key?: keyof IMission,
-  value?: string,
-}
-
 export interface IMission {
   id: number,
   title: string,
@@ -16,14 +10,21 @@ export interface IMission {
 export const missionSlice = createSlice({
   name: 'missions',
   initialState: {
-    info: undefined as string|undefined,
+    loading: true,
     editing: false,
+    info: undefined as string|undefined,
     item: {} as IMission,
     list: [] as IMission[]
   },
   reducers: {
-    viewMission: (state, action:PayloadAction<IPayloadAction>) => {
-      if(action.payload.id===0)
+    setLoading: (state, action:PayloadAction<boolean>) => {
+      state.loading = action.payload
+    },
+    setList: (state, action:PayloadAction<IMission[]>) => {
+      state.list = action.payload
+    },
+    viewMission: (state, action:PayloadAction<number>) => {
+      if(action.payload===0)
       {
         state.editing = true
         state.info = 'Adding new mission...'
@@ -34,7 +35,7 @@ export const missionSlice = createSlice({
           createdBy:''
         } as IMission
       }else{
-        const item = state.list.find(x=>x.id===action.payload.id)
+        const item = state.list.find(x=>x.id===action.payload)
         if(item)
         {
           state.editing = true
@@ -43,7 +44,7 @@ export const missionSlice = createSlice({
         }
       }
   },
-    updateMission: (state, action:PayloadAction<IPayloadAction>) => {
+    updateMission: (state, action:PayloadAction<{key:keyof IMission,value:string}>) => {
       if(action.payload.key && action.payload.value)
         state.item = {...state.item,[action.payload.key]:action.payload.value} as IMission
     },
@@ -63,25 +64,8 @@ export const missionSlice = createSlice({
       state.item = {id:0} as IMission
       state.info = undefined
   },
-    deleteMission: (state, action:PayloadAction<IPayloadAction>) => {
-      state.list = state.list.filter(x=>x.id!==action.payload.id)
-  },
-    getAllMissions: (state) => {
-      state.editing = false
-      state.list = [
-        {id: 1,
-        title: 'Go to Mars',
-        description: 'Find a rabbit',
-        createdBy: '@mars_man',},
-        {id: 2,
-          title: 'Land on Mars',
-          description: 'Fly the Union Flag',
-          createdBy: '@mars_lady',},
-        {id: 3,
-          title: 'Tour around Mars',
-          description: 'Get lucky!',
-          createdBy: '@oh_boy',},
-      ]
+    deleteMission: (state, action:PayloadAction<number>) => {
+      state.list = state.list.filter(x=>x.id!==action.payload)
   },
     deleteAllMissions: (state) => {
       state.editing = false
@@ -91,10 +75,11 @@ export const missionSlice = createSlice({
 })
 
 export const {
+  setLoading,
+  setList,
   viewMission,
   updateMission,
   cancelMission,
   submitMission,
   deleteMission,
-  getAllMissions,
   deleteAllMissions} = missionSlice.actions

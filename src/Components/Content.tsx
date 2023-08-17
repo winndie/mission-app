@@ -13,7 +13,7 @@ const Content = () => {
   
   return (
     <div className='border border-primary'>
-      {editing?<></>:<button onClick={()=>dispatch(viewMission({id:0}))} type="submit" className="btn btn-primary">Add</button>}
+      {editing?<></>:<button onClick={()=>dispatch(viewMission(0))} type="submit" className="btn btn-primary">Add</button>}
       <Form/>
       <Table/>
     </div>
