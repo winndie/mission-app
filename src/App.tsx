@@ -1,23 +1,23 @@
 import React from 'react'
 import './index.css'
-import Banner from './Components/Banner'
-import Header from './Components/Header'
-import Sidebar from './Components/Sidebar'
-import Content from './Components/Content'
+import Snackbar from './components/Snackbar'
+import Header from './components/Header'
+import Sidebar from './components/Sidebar'
+import Content from './components/Content'
 
 const App:React.FC=()=>{
   return (
     <>
-    <Banner/>
+    <Snackbar/>
       <div className="container">
         <div className="row">
           <Header/>
         </div>
         <div className="row">
-          <div className="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+          <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2">
             <Sidebar/>
           </div>
-          <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+          <div className="col-sm-10 col-md-10 col-lg-10 col-xl-10">
             <Content/>
           </div>
         </div>
