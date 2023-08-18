@@ -17,10 +17,10 @@ export const missionSlice = createSlice({
     list: [] as IMission[]
   },
   reducers: {
-    setLoading: (state, action:PayloadAction<boolean>) => {
+    setMissionsLoading: (state, action:PayloadAction<boolean>) => {
       state.loading = action.payload
     },
-    setList: (state, action:PayloadAction<IMission[]>) => {
+    setMissionsList: (state, action:PayloadAction<IMission[]>) => {
       state.list = action.payload
     },
     viewMission: (state, action:PayloadAction<number>) => {
@@ -75,8 +75,8 @@ export const missionSlice = createSlice({
 })
 
 export const {
-  setLoading,
-  setList,
+  setMissionsLoading,
+  setMissionsList,
   viewMission,
   updateMission,
   cancelMission,

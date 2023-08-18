@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../index.css'
-import '../logo.svg'
+import { RootState,useAppDispatch } from "../state"
+import { useSelector } from "react-redux"
+import { fetchAllMissions } from '../api'
 
 const Header:React.FC=()=>{
+  const dispatch = useAppDispatch()
+  const picture = useSelector((state:RootState) => state.picture.item)
+
+  useEffect(()=>{
+    dispatch(fetchAllMissions())
+  },[dispatch])
+
   return (
     <div className='mx-auto'>
-          <h1>Mars Mission</h1>
+          <img src={picture} alt={''}/>
     </div>          
   )
 }

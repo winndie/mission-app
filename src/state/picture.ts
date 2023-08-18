@@ -1,16 +1,18 @@
-import { createSlice,createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 
 export const pictureSlice = createSlice({
     name: 'picture',
     initialState: {
-        loading: true,
+        item: undefined as string|undefined,
     },
     reducers: {
-        setLoading: (state, action:PayloadAction<boolean>) => {
-            state.loading = action.payload
+        setPictureItem: (state, action:PayloadAction<string>) => {
+            state.item = action.payload
         },      
     },
   })
 
-export const {setLoading} = pictureSlice.actions
+export const {
+    setPictureItem
+} = pictureSlice.actions
   

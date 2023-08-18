@@ -1,9 +1,8 @@
-import React, { useEffect } from "react"
+import React from "react"
 import '../index.css'
 import { useSelector } from "react-redux"
 import { RootState,useAppDispatch } from "../state"
 import { viewMission,deleteMission } from '../state/missions'
-import { fetchAllMissions } from '../api'
 
 const Table = () => {
   const dispatch = useAppDispatch()
@@ -12,10 +11,6 @@ const Table = () => {
     editing?
     state.mission.list.filter(x=>x.id!==state.mission.item.id):
     state.mission.list)
-
-  useEffect(()=>{
-    dispatch(fetchAllMissions())
-  },[])
 
   return (
     <div className="table-responsive">

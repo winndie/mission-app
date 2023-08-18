@@ -7,9 +7,8 @@ import { useSelector } from "react-redux"
 import { viewMission } from '../state/missions'
 
 const Content = () => {
-
-  const editing = useSelector((state:RootState) => state.mission.editing)
   const dispatch = useAppDispatch()
+  const editing = useSelector((state:RootState) => state.mission.editing)
   
   return (
     <div className='border border-primary'>

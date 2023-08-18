@@ -6,14 +6,14 @@ import { deleteAllMissions } from '../state/missions'
 
 const Sidebar = () => {
 
-  const noOfMissions = useSelector((state:RootState) => state.mission.list.length)
+  const missionsCount = useSelector((state:RootState) => state.mission.list.length)
   const editing = useSelector((state:RootState) => state.mission.editing)
   const dispatch = useAppDispatch()
 
   return (
     <div className='border border-primary container'>
       <div>Number of missions:</div>
-      <div>{noOfMissions}</div>
+      <div>{missionsCount}</div>
       {editing?<></>:
       <button className='btn btn-primary' onClick={()=>dispatch(deleteAllMissions())}>
         Delete All
