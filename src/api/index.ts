@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {IMission,setMissionsLoading,setMissionsList} from '../state/missions'
+import {IMission,setMissionsLoading,setMissionsList,setMissionItem} from '../state/missions'
 import {setPictureItem} from '../state/picture'
 import {setUser} from '../state/app'
+import { RootState } from '../state'
 
 const pictureUri = 'https://source.unsplash.com/random/800x600/?mars'
 
@@ -30,15 +31,18 @@ export const fetchAllMissions = createAsyncThunk(
             {id: 1,
             title: 'Go to Mars',
             description: 'Find a rabbit',
-            createdBy: '@mars_man',},
+            createdBy: '@mars_man',
+            modifiedBy:undefined},
             {id: 2,
               title: 'Land on Mars',
               description: 'Fly the Union Flag',
-              createdBy: '@mars_lady',},
+              createdBy: '@mars_lady',
+              modifiedBy:undefined},
             {id: 3,
               title: 'Tour around Mars',
               description: 'Get lucky!',
-              createdBy: '@oh_boy',},
+              createdBy: '@oh_boy',
+              modifiedBy:undefined},
           ]
 
           if(result.user)
@@ -58,3 +62,15 @@ export const fetchAllMissions = createAsyncThunk(
     }
 )
   
+export const viewMission = createAsyncThunk<void,number,{state : RootState}>(
+  'mission/view',
+  (id, thunkAPI) => {
+    const user = thunkAPI.getState().app.user
+    const mission = {
+      id:id,
+      createdBy: id===0?user:undefined,
+      modifiedBy: id===0?undefined:user
+    } as IMission
+    thunkAPI.dispatch(setMissionItem(mission))
+  }
+)

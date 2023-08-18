@@ -7,10 +7,11 @@ import { deleteAllMissions } from '../state/missions'
 const Sidebar = () => {
 
   const missionsCount = useSelector((state:RootState) => state.mission.list.length)
-  const editing = useSelector((state:RootState) => state.mission.editing)
+  const {loading,editing} = useSelector((state:RootState) => state.mission)
   const dispatch = useAppDispatch()
 
   return (
+    loading?<>Loading...</>:
     <div className='border border-primary container'>
       <div>Number of missions:</div>
       <div>{missionsCount}</div>

@@ -5,6 +5,7 @@ export interface IMission {
   title: string,
   description: string,
   createdBy: string,
+  modifiedBy: string|undefined,
 }
 
 export const missionSlice = createSlice({
@@ -23,22 +24,18 @@ export const missionSlice = createSlice({
     setMissionsList: (state, action:PayloadAction<IMission[]>) => {
       state.list = action.payload
     },
-    viewMission: (state, action:PayloadAction<number>) => {
-      if(action.payload===0)
+    setMissionItem: (state, action:PayloadAction<IMission>) => {
+      if(action.payload.id===0)
       {
         state.editing = true
         state.info = 'Adding new mission...'
-        state.item = {
-          id:0,
-          title:'',
-          description:'',
-          createdBy:''
-        } as IMission
+        state.item = action.payload
       }else{
-        const item = state.list.find(x=>x.id===action.payload)
+        const item = state.list.find(x=>x.id===action.payload.id)
         if(item)
         {
           state.editing = true
+          item.modifiedBy = action.payload.modifiedBy
           state.info = 'Editing mission #'+item.id
           state.item = item  
         }
@@ -77,7 +74,7 @@ export const missionSlice = createSlice({
 export const {
   setMissionsLoading,
   setMissionsList,
-  viewMission,
+  setMissionItem,
   updateMission,
   cancelMission,
   submitMission,

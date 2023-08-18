@@ -4,13 +4,14 @@ import Form from './Form'
 import Table from './Table'
 import { RootState,useAppDispatch } from "../state"
 import { useSelector } from "react-redux"
-import { viewMission } from '../state/missions'
+import { viewMission } from '../api'
 
 const Content = () => {
   const dispatch = useAppDispatch()
-  const editing = useSelector((state:RootState) => state.mission.editing)
+  const {loading,editing} = useSelector((state:RootState) => state.mission)
   
   return (
+    loading?<>Loading...</>:
     <div className='border border-primary'>
       {editing?<></>:<button onClick={()=>dispatch(viewMission(0))} type="submit" className="btn btn-primary">Add</button>}
       <Form/>

@@ -19,8 +19,17 @@ const Form = () => {
           <label htmlFor="title">Title</label>
           </div>
           <div className="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-          <input value={item.title} onChange={(e)=>dispatch(updateMission({key:'title',value:e.currentTarget.value}))} type="string" className="form-control" id="title" aria-describedby="title" placeholder="Title of the mission"/>
-          <small id="titleHelp" className="form-text text-muted">What is the title?</small>
+          <input maxLength={100} value={item.title} onChange={(e)=>dispatch(updateMission({key:'title',value:e.currentTarget.value}))} type="string" className="form-control" id="title" aria-describedby="title" placeholder="Title of the mission"/>
+          <small id="titleHelp" className="form-text text-muted">What is the mission?</small>
+          </div>
+    </div>
+    <div className="row">
+          <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+          <label htmlFor="description">Description</label>
+          </div>
+          <div className="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+          <input maxLength={500} value={item.description} onChange={(e)=>dispatch(updateMission({key:'description',value:e.currentTarget.value}))} type="string" className="form-control" id="title" aria-describedby="title" placeholder="Description of the mission"/>
+          <small id="descriptionHelp" className="form-text text-muted">Describe the mission here</small>
           </div>
     </div>
     <div className="row">

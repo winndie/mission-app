@@ -2,7 +2,8 @@ import React from "react"
 import '../index.css'
 import { useSelector } from "react-redux"
 import { RootState,useAppDispatch } from "../state"
-import { viewMission,deleteMission } from '../state/missions'
+import { deleteMission } from '../state/missions'
+import { viewMission } from '../api'
 
 const Table = () => {
   const dispatch = useAppDispatch()
@@ -22,6 +23,7 @@ const Table = () => {
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Created By</th>
+      <th scope="col">Modified By</th>
       {editing?<></>:
       <th scope="col">Actions</th>}
     </tr>
@@ -36,6 +38,7 @@ const Table = () => {
         <td>{x.title}</td>
         <td>{x.description}</td>
         <td>{x.createdBy}</td>
+        <td>{x.modifiedBy}</td>
         {editing?<></>:
         <td className="row">
           <button onClick={()=>dispatch(viewMission(x.id))} type="submit" className="btn btn-primary">Edit</button>
