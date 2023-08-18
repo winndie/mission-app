@@ -12,13 +12,14 @@ const Sidebar = () => {
 
   return (
     loading?<>Loading...</>:
-    <div className='border border-primary container'>
-      <div>Number of missions:</div>
-      <div>{missionsCount}</div>
+    <div  data-testid='sidebar' className='border border-primary p-3 flex-wrap'>
+      <div className='text-center'>Missions Count: {missionsCount}</div>
       {editing?<></>:
+      <div className="p-1">
       <button className='btn btn-primary' onClick={()=>dispatch(deleteAllMissions())}>
         Delete All
-      </button>}      
+      </button>
+      </div>}     
     </div>
   )
 }

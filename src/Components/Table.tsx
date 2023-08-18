@@ -14,7 +14,7 @@ const Table = () => {
     state.mission.list)
 
   return (
-    <div className="table-responsive">
+    <div  data-testid='mission-table' className="table-responsive p-2">
       <table className="table">
       <caption>List of missions</caption>
   <thead>
@@ -41,8 +41,12 @@ const Table = () => {
         <td>{x.modifiedBy}</td>
         {editing?<></>:
         <td className="row">
+          <div className="p-1">
           <button onClick={()=>dispatch(viewMission(x.id))} type="submit" className="btn btn-primary">Edit</button>
-          <button onClick={()=>dispatch(deleteMission(x.id))} type="submit" className="btn btn-primary">Delete</button>
+          </div>
+          <div className="p-1">
+          <button onClick={()=>dispatch(deleteMission(x.id))} type="submit" className="btn btn-primary">Delete</button>            
+          </div>
         </td>}
         </tr>    
       ))

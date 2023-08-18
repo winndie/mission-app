@@ -13,7 +13,10 @@ const Content = () => {
   return (
     loading?<>Loading...</>:
     <div className='border border-primary'>
-      {editing?<></>:<button onClick={()=>dispatch(viewMission(0))} type="submit" className="btn btn-primary">Add</button>}
+      {editing?<></>:
+      <div className="p-2">
+        <button onClick={()=>dispatch(viewMission(0))} type="submit" className="btn btn-primary">Add</button>
+        </div>}
       <Form/>
       <Table/>
     </div>

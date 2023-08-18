@@ -13,7 +13,7 @@ const Header:React.FC=()=>{
   },[dispatch])
 
   return (
-    <div className='mx-auto'>
+    <div data-testid='header' className='mx-auto p-3'>
           <img src={picture} alt={''}/>
     </div>          
   )

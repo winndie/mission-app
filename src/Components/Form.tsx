@@ -13,7 +13,7 @@ const Form = () => {
   return (
     editing?
     <>
-    <form className="form-group container">
+    <form  data-testid='mission-form' className="form-group p-2 flex-wrap">
     <div className="row">
           <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2">
           <label htmlFor="title">Title</label>
@@ -32,14 +32,15 @@ const Form = () => {
           <small id="descriptionHelp" className="form-text text-muted">Describe the mission here</small>
           </div>
     </div>
-    <div className="row">
-      <button type="submit" onClick={(e)=>{
+    <div className="row p-2">
+      <div className="p-1"><button type="submit" onClick={(e)=>{
         e.preventDefault()
         dispatch(submitMission())
-      }} className="btn btn-primary col-sm-2 col-md-2 col-lg-2 col-xl-2">Submit</button>      
-      <button type="submit" onClick={(e)=>{
+      }} className="btn btn-primary">Submit</button></div>      
+      <div className="p-1"><button type="submit" onClick={(e)=>{
         e.preventDefault()
-        dispatch(cancelMission())}} className="btn btn-primary col-sm-2 col-md-2 col-lg-2 col-xl-2">Cancel</button>
+        dispatch(cancelMission())
+      }} className="btn btn-primary">Cancel</button></div>
     </div>
     </form>
     </>
