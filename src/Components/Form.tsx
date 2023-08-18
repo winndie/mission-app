@@ -13,7 +13,7 @@ const Form = () => {
   return (
     editing?
     <>
-    <form  data-testid='mission-form' className="form-group p-2 flex-wrap">
+    <form data-testid='mission-form' className="form-group p-2 flex-wrap">
     <div className="row">
           <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2">
           <label htmlFor="title">Title</label>

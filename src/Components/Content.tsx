@@ -14,7 +14,7 @@ const Content = () => {
     loading?<>Loading...</>:
     <div className='border border-primary'>
       {editing?<></>:
-      <div className="p-2">
+      <div data-testid='mission-add' className="p-2">
         <button onClick={()=>dispatch(viewMission(0))} type="submit" className="btn btn-primary">Add</button>
         </div>}
       <Form/>
