@@ -14,7 +14,7 @@ const Table = () => {
     state.mission.list)
 
   return (
-    <div  data-testid='mission-table' className="table-responsive p-2">
+    <div data-testid='mission-table' className="p-2 table-responsive-lg table-responsive-xl table-responsive-md table-responsive-sm">
       <table className="table">
       <caption>List of missions</caption>
   <thead>

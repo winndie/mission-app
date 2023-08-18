@@ -5,7 +5,6 @@ import store from './state'
 import App from './App'
 
 const initComponents = ['snackbar','header']
-const components = ['snackbar','header','sidebar','mission-form','mission-table']
 
 test('renders init components', () => {
   render(<Provider store={store}><App /></Provider>)

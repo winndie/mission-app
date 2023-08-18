@@ -1774,9 +1774,7 @@ pre code {
   .table-responsive-lg {
     display: block;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+    overflow: hidden
   }
   .table-responsive-lg > .table-bordered {
     border: 0;
@@ -1787,9 +1785,7 @@ pre code {
   .table-responsive-xl {
     display: block;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+    overflow: hidden
   }
   .table-responsive-xl > .table-bordered {
     border: 0;
