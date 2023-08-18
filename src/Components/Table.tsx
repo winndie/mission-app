@@ -33,7 +33,7 @@ const Table = () => {
       loading?<>Loading...</>:
       list.length===0?<tr>No record found</tr>:
       list.map(x=>(
-        <tr>
+        <tr key={x.id}>
         <th scope="row">{x.id}</th>
         <td>{x.title}</td>
         <td>{x.description}</td>
