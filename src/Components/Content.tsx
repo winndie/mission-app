@@ -4,7 +4,7 @@ import Form from './Form'
 import Table from './Table'
 import { RootState,useAppDispatch } from "../state"
 import { useSelector } from "react-redux"
-import { viewMission } from '../api'
+import { viewMission } from '../services'
 
 const Content = () => {
   const dispatch = useAppDispatch()

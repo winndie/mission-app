@@ -3,7 +3,7 @@ import '../index.css'
 import { useSelector } from "react-redux"
 import { RootState,useAppDispatch } from "../state"
 import { deleteMission } from '../state/missions'
-import { viewMission } from '../api'
+import { viewMission } from '../services'
 
 const Table = () => {
   const dispatch = useAppDispatch()

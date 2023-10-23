@@ -1,12 +1,5 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-
-export interface IMission {
-  id: number,
-  title: string,
-  description: string,
-  createdBy: string,
-  modifiedBy: string|undefined,
-}
+import { IMission, IMissionErrors } from '../types'
 
 export const missionSlice = createSlice({
   name: 'missions',
@@ -14,6 +7,7 @@ export const missionSlice = createSlice({
     loading: true,
     editing: false,
     info: undefined as string|undefined,
+    errors: {} as IMissionErrors,
     item: {} as IMission,
     list: [] as IMission[]
   },
@@ -41,33 +35,41 @@ export const missionSlice = createSlice({
         }
       }
   },
+    updateError: (state, action:PayloadAction<{key:keyof IMissionErrors,error:string}>) => {
+      state.errors = {...state.errors,[action.payload.key]:action.payload.error}
+    },
     updateMission: (state, action:PayloadAction<{key:keyof IMission,value:string}>) => {
-      if(action.payload.key && action.payload.value)
-        state.item = {...state.item,[action.payload.key]:action.payload.value} as IMission
-    },
+        if(action.payload.key && action.payload.value)
+          state.item = {...state.item,[action.payload.key]:action.payload.value} as IMission
+      },
     cancelMission: (state) => {
-      state.editing = false
-      state.item = {id:0} as IMission
-      state.info = undefined
-    },
+        state.editing = false
+        state.item = {id:0} as IMission
+        state.info = undefined
+        state.errors = {} as IMissionErrors
+      },
     submitMission: (state) => {
-      if(state.item.id === 0)
-      {
-        state.list = [...state.list,{...state.item,id:state.list.length+1}]
-      }else{
-        state.list = state.list.map(x=>x.id===state.item.id?state.item:x)            
-      }
-      state.editing = false
-      state.item = {id:0} as IMission
-      state.info = undefined
-  },
-    deleteMission: (state, action:PayloadAction<number>) => {
-      state.list = state.list.filter(x=>x.id!==action.payload)
-  },
-    deleteAllMissions: (state) => {
-      state.editing = false
-      state.list = []
+
+        if(state.item.id === 0)
+        {
+          state.list = [...state.list,{...state.item,id:state.list.length+1}]
+        }else{
+          state.list = state.list.map(x=>x.id===state.item.id?state.item:x)            
+        }
+        state.editing = false
+        state.item = {id:0} as IMission
+        state.info = undefined
+        state.errors = {} as IMissionErrors
     },
+    deleteMission: (state, action:PayloadAction<number>) => {
+        state.list = state.list.filter(x=>x.id!==action.payload)
+        state.errors = {} as IMissionErrors
+    },
+    deleteAllMissions: (state) => {
+        state.editing = false
+        state.list = []
+        state.errors = {} as IMissionErrors
+      },
   },
 })
 
@@ -75,6 +77,7 @@ export const {
   setMissionsLoading,
   setMissionsList,
   setMissionItem,
+  updateError,
   updateMission,
   cancelMission,
   submitMission,

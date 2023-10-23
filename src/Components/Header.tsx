@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import '../index.css'
 import { RootState,useAppDispatch } from "../state"
 import { useSelector } from "react-redux"
-import { fetchAllMissions } from '../api'
+import { fetchAllMissions } from '../services'
 
 const Header:React.FC=()=>{
   const dispatch = useAppDispatch()
@@ -14,7 +14,7 @@ const Header:React.FC=()=>{
 
   return (
     <div data-testid='header' className='mx-auto p-3'>
-          <img src={picture} alt={''}/>
+          <img src={picture} alt={''} height={128} />
     </div>          
   )
 }
