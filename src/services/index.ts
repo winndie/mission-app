@@ -5,7 +5,7 @@ import {setUser} from '../state/app'
 import { RootState } from '../state'
 import { IMission, IMissionErrors } from '../types'
 import { missionInputProps } from '../constants/mission'
-import { InputTextOverflow, InputTextUnderflow } from '../errors'
+import { validateString } from '../errors'
 
 const pictureUri = 'https://source.unsplash.com/random/800x600/?mars'
 
@@ -71,8 +71,10 @@ export const viewMission = createAsyncThunk<void,number,{state : RootState}>(
     const user = thunkAPI.getState().app.user
     const mission = {
       id:id,
-      createdBy: id===0?user:undefined,
-      modifiedBy: id===0?undefined:user
+      title:'',
+      description:'',
+      createdBy: user,
+      modifiedBy: undefined
     } as IMission
     thunkAPI.dispatch(setMissionItem(mission))
   }
@@ -82,27 +84,17 @@ export const validateMission = createAsyncThunk<boolean,void,{state : RootState}
   'mission/validate',
   (_, thunkAPI) => {
     
-    let error = undefined as undefined|string
-
     missionInputProps.forEach(x=>{
 
-      const value = thunkAPI.getState().mission.item[x.key]
-
-      if(x.type === 'string')
+      switch(x.type)
       {
-        if(typeof value !== 'string' || value.length < x.minLength)
-        {
-          error = `${InputTextUnderflow} ${x.minLength}.`
-        }
-        else if(value.length > x.maxLength)
-        {
-          error = `${InputTextOverflow} ${x.maxLength}.`
-        }
+        case 'string':
+          thunkAPI.dispatch(updateError({key:x.key as keyof IMissionErrors,error:validateString(thunkAPI.getState().mission.item[x.key],x)}))
+          break
       }
 
-       !!error && thunkAPI.dispatch(updateError({key:x.key as keyof IMissionErrors,error:`${InputTextUnderflow} ${x.minLength}.`}))
     })
 
-    return typeof error === 'undefined'
+    return !Object.values(thunkAPI.getState().mission.errors).some(x=>!!x)
   }
 )

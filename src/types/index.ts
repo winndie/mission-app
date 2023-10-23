@@ -6,7 +6,6 @@ export interface InputProps {
     placeholder:string,
     help:string,
     regex?:string,
-    error?:string,
 }
 
 export interface IMission {

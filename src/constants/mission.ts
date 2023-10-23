@@ -10,7 +10,6 @@ export const missionInputProps = new Map<string,IMissionInputProps>([
         placeholder:'Title of the mission',
         help:'What is the mission?',
         regex:undefined,
-        error:undefined,
     }],
     ['description',{
         type: 'string',
@@ -20,8 +19,7 @@ export const missionInputProps = new Map<string,IMissionInputProps>([
         maxLength:50,
         placeholder:'Description of the mission',
         help:'Describe the mission here',
-        regex:undefined,
-        error:undefined,
+        regex:'EMAIL',
     }],
 ])
 
