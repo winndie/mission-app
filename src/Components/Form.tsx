@@ -24,12 +24,8 @@ const Form = () => {
     <div className="row p-2">
       <div className="p-1"><button type="submit" onClick={(e)=>{
         e.preventDefault()
-        dispatch(validateMission()).then(resp=>{
-          if(resp.payload)
-          {
-            dispatch(submitMission())
-          }
-        })
+        dispatch(validateMission())
+          .then(x=>x.payload && dispatch(submitMission()))
       }} className="btn btn-primary">Submit</button></div>      
       <div className="p-1"><button type="submit" onClick={(e)=>{
         e.preventDefault()

@@ -22,6 +22,6 @@ export interface IMissionInputProps extends InputProps {
 }
 
 export interface IMissionErrors {
-    title: string,
-    description: string,
+    title: string|undefined,
+    description: string|undefined,
 }

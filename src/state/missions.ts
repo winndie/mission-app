@@ -35,7 +35,7 @@ export const missionSlice = createSlice({
         }
       }
   },
-    updateError: (state, action:PayloadAction<{key:keyof IMissionErrors,error:string}>) => {
+    updateError: (state, action:PayloadAction<{key:keyof IMissionErrors,error:string|undefined}>) => {
       state.errors = {...state.errors,[action.payload.key]:action.payload.error}
     },
     updateMission: (state, action:PayloadAction<{key:keyof IMission,value:string}>) => {

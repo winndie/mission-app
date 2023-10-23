@@ -1946,6 +1946,10 @@ textarea.form-control {
   margin-top: 0.25rem;
 }
 
+.form-text-error {
+  color: red;
+}
+
 .form-row {
   display: -ms-flexbox;
   display: flex;

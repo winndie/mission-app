@@ -2,7 +2,7 @@ import React from "react"
 import '../index.css'
 import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "../state"
-import { updateMission } from "../state/missions"
+import { updateError, updateMission } from "../state/missions"
 import { IMissionErrors, IMissionInputProps } from "../types"
 
 const Input:React.FC<{props:IMissionInputProps}> = ({props}) => {
@@ -17,13 +17,14 @@ const Input:React.FC<{props:IMissionInputProps}> = ({props}) => {
     </div>
     <div className="col-sm-10 col-md-10 col-lg-10 col-xl-10">
     <input
-        value={value} 
+        value={value}
+        onFocus={()=>dispatch(updateError({key:props.key as keyof IMissionErrors, error:undefined}))}
         onChange={(e)=>dispatch(updateMission({key:props.key, value:e.currentTarget.value}))}
         placeholder={props.placeholder}
         minLength={props.minLength}
         maxLength={props.maxLength}
         type="string" className="form-control"/>
-    <small className="form-text text-muted">{error??props.help}</small>
+    <small className={!!error?'form-text-error ':''+'form-text text-muted'}>{error??props.help}</small>
     </div>
     </>)
 }
