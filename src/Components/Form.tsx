@@ -12,15 +12,12 @@ const Form = () => {
   const {editing} = useSelector((state:RootState) => state.mission)
   const dispatch = useAppDispatch()
 
-  const titleProps = missionInputProps.get('title')
-  const descriptionProps = missionInputProps.get('description')
-
   return (
     editing?
     <>
     <form data-testid='mission-form' className="form-group p-2 flex-wrap">
-      <div className="row">{!!titleProps &&  <Input props={titleProps}/>}</div>
-      <div className="row">{!!descriptionProps &&  <Input props={descriptionProps}/>}</div>
+      <div className="row">{!!missionInputProps.title && <Input name={'title'} props={missionInputProps.title}/>}</div>
+      <div className="row">{!!missionInputProps.description && <Input name={'description'} props={missionInputProps.description}/>}</div>
     <div className="row p-2">
       <div className="p-1"><button type="submit" onClick={(e)=>{
         e.preventDefault()

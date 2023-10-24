@@ -24,6 +24,6 @@ export interface IMission {
     modifiedBy: string|undefined,
 }
 
-export interface IMissionInputProps extends InputProps {
-    key: keyof IMission,
+export type IMissionInputProps<InputProps> = {
+    [key in keyof IMission]:InputProps|undefined
 }

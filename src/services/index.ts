@@ -83,13 +83,15 @@ export const viewMission = createAsyncThunk<void,number,{state : RootState}>(
 export const validateMission = createAsyncThunk<boolean,void,{state : RootState}>(
   'mission/validate',
   (_, thunkAPI) => {
-    
-    missionInputProps.forEach(x=>{
 
-      switch(x.type)
+    Object.entries(missionInputProps).filter(x=>!!x[1]).forEach(x=>{
+
+      switch(x[1]?.type)
       {
         case 'string':
-          thunkAPI.dispatch(updateError({key:x.key as keyof IErrors,error:validateString(thunkAPI.getState().mission.item[x.key],x)}))
+          thunkAPI.dispatch(updateError({
+            key:x[0] as keyof IErrors,
+            error:validateString(thunkAPI.getState().mission.item[x[0] as keyof IMission],x[1])}))
           break
       }
 

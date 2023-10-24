@@ -1,26 +1,27 @@
 import { regex } from "../errors"
-import { IMissionInputProps } from "../types"
+import { IMissionInputProps, InputProps } from "../types"
 
-export const missionInputProps = new Map<string,IMissionInputProps>([
-    ['title',{
+export const missionInputProps:IMissionInputProps<InputProps> = {
+    title:{
         type: 'string',
-        key:'title',
         label:'Title',
         minLength:5,
         maxLength:20,
         placeholder:'Title of the mission',
         help:'What is the mission?',
         regex:undefined,
-    }],
-    ['description',{
+    },
+    description:{
         type: 'string',
-        key:'description',
         label:'Description',
         minLength:10,
         maxLength:50,
         placeholder:'Description of the mission',
         help:'Describe the mission here',
         regex:'email',
-    }],
-])
+    },
+    id: undefined,
+    createdBy: undefined,
+    modifiedBy: undefined,
+}
 
