@@ -1,3 +1,4 @@
+import { regex } from "../errors"
 import { IMissionInputProps } from "../types"
 
 export const missionInputProps = new Map<string,IMissionInputProps>([
@@ -19,7 +20,7 @@ export const missionInputProps = new Map<string,IMissionInputProps>([
         maxLength:50,
         placeholder:'Description of the mission',
         help:'Describe the mission here',
-        regex:'EMAIL',
+        regex:'email',
     }],
 ])
 

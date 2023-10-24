@@ -8,6 +8,14 @@ export interface InputProps {
     regex?:string,
 }
 
+export interface IErrors {
+    [key:string]: string|undefined,
+}
+
+export interface IRegex {
+    [key:string]: {regex:RegExp,error:string},
+}
+
 export interface IMission {
     id: number,
     title: string,
@@ -18,9 +26,4 @@ export interface IMission {
 
 export interface IMissionInputProps extends InputProps {
     key: keyof IMission,
-}
-
-export interface IMissionErrors {
-    title: string|undefined,
-    description: string|undefined,
 }

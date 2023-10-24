@@ -3,7 +3,7 @@ import {setMissionsLoading,setMissionsList,setMissionItem,updateError} from '../
 import {setPictureItem} from '../state/picture'
 import {setUser} from '../state/app'
 import { RootState } from '../state'
-import { IMission, IMissionErrors } from '../types'
+import { IMission, IErrors } from '../types'
 import { missionInputProps } from '../constants/mission'
 import { validateString } from '../errors'
 
@@ -89,7 +89,7 @@ export const validateMission = createAsyncThunk<boolean,void,{state : RootState}
       switch(x.type)
       {
         case 'string':
-          thunkAPI.dispatch(updateError({key:x.key as keyof IMissionErrors,error:validateString(thunkAPI.getState().mission.item[x.key],x)}))
+          thunkAPI.dispatch(updateError({key:x.key as keyof IErrors,error:validateString(thunkAPI.getState().mission.item[x.key],x)}))
           break
       }
 

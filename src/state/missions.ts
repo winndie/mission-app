@@ -1,5 +1,5 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import { IMission, IMissionErrors } from '../types'
+import { IMission, IErrors } from '../types'
 
 export const missionSlice = createSlice({
   name: 'missions',
@@ -7,7 +7,7 @@ export const missionSlice = createSlice({
     loading: true,
     editing: false,
     info: undefined as string|undefined,
-    errors: {} as IMissionErrors,
+    errors: {} as IErrors,
     item: {} as IMission,
     list: [] as IMission[]
   },
@@ -35,7 +35,7 @@ export const missionSlice = createSlice({
         }
       }
   },
-    updateError: (state, action:PayloadAction<{key:keyof IMissionErrors,error:string|undefined}>) => {
+    updateError: (state, action:PayloadAction<{key:keyof IErrors,error:string|undefined}>) => {
       state.errors = {...state.errors,[action.payload.key]:action.payload.error}
     },
     updateMission: (state, action:PayloadAction<{key:keyof IMission,value:string}>) => {
@@ -46,7 +46,7 @@ export const missionSlice = createSlice({
         state.editing = false
         state.item = {id:0} as IMission
         state.info = undefined
-        state.errors = {} as IMissionErrors
+        state.errors = {} as IErrors
       },
     submitMission: (state) => {
 
@@ -59,16 +59,16 @@ export const missionSlice = createSlice({
         state.editing = false
         state.item = {id:0} as IMission
         state.info = undefined
-        state.errors = {} as IMissionErrors
+        state.errors = {} as IErrors
     },
     deleteMission: (state, action:PayloadAction<number>) => {
         state.list = state.list.filter(x=>x.id!==action.payload)
-        state.errors = {} as IMissionErrors
+        state.errors = {} as IErrors
     },
     deleteAllMissions: (state) => {
         state.editing = false
         state.list = []
-        state.errors = {} as IMissionErrors
+        state.errors = {} as IErrors
       },
   },
 })
