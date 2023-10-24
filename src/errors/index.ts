@@ -1,12 +1,9 @@
-import { IErrors, IRegex, InputProps } from "../types"
+import { regex } from "../constants"
+import { IErrors, InputProps } from "../types"
 
 export const inputTextError:IErrors = {
     'underflow' : 'Input must be longer than',
-    'overflow' : 'Input must be shorter than'    
-}
-
-export const regex:IRegex = {
-    'email':{regex:new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g),error:'Invalid email.'},
+    'overflow' : 'Input must be shorter than'
 }
 
 export function validateString(value:any, rule:InputProps):string|undefined{

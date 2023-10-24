@@ -1,5 +1,8 @@
-import { regex } from "../errors"
-import { IMissionInputProps, InputProps } from "../types"
+import { IMissionInputProps, IRegex, InputProps } from "../types"
+
+export const regex:IRegex = {
+    'email':{regex:new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g),error:'Invalid email.'},
+}
 
 export const missionInputProps:IMissionInputProps<InputProps> = {
     title:{
@@ -20,8 +23,4 @@ export const missionInputProps:IMissionInputProps<InputProps> = {
         help:'Describe the mission here',
         regex:'email',
     },
-    id: undefined,
-    createdBy: undefined,
-    modifiedBy: undefined,
 }
-

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "../state"
 import { submitMission, cancelMission } from "../state/missions"
 import Input from "./Input"
-import { missionInputProps } from '../constants/mission'
+import { missionInputProps } from '../constants'
 import { validateMission } from "../services"
 
 const Form = () => {

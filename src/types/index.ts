@@ -25,5 +25,5 @@ export interface IMission {
 }
 
 export type IMissionInputProps<InputProps> = {
-    [key in keyof IMission]:InputProps|undefined
+    [key in keyof IMission]?:InputProps
 }

@@ -4,7 +4,7 @@ import {setPictureItem} from '../state/picture'
 import {setUser} from '../state/app'
 import { RootState } from '../state'
 import { IMission, IErrors } from '../types'
-import { missionInputProps } from '../constants/mission'
+import { missionInputProps } from '../constants'
 import { validateString } from '../errors'
 
 const pictureUri = 'https://source.unsplash.com/random/800x600/?mars'
