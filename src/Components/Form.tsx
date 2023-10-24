@@ -16,8 +16,8 @@ const Form = () => {
     editing?
     <>
     <form data-testid='mission-form' className="form-group p-2 flex-wrap">
-      <div className="row">{!!missionInputProps.title && <Input uiKey={'title'} props={missionInputProps.title}/>}</div>
-      <div className="row">{!!missionInputProps.description && <Input uiKey={'description'} props={missionInputProps.description}/>}</div>
+      <div className="row">{!!missionInputProps.title && <Input storeKey={'mission'} uiKey={'title'} props={missionInputProps.title}/>}</div>
+      <div className="row">{!!missionInputProps.description && <Input storeKey={'mission'} uiKey={'description'} props={missionInputProps.description}/>}</div>
     <div className="row p-2">
       <div className="p-1"><button type="submit" onClick={(e)=>{
         e.preventDefault()

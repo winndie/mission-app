@@ -5,11 +5,11 @@ import { RootState, useAppDispatch } from "../state"
 import { updateError, updateMission } from "../state/missions"
 import { IMission, InputProps } from "../types"
 
-const Input:React.FC<{uiKey:keyof IMission,props:InputProps}> = ({uiKey,props}) => {
+const Input:React.FC<{storeKey: 'mission', uiKey:keyof IMission, props:InputProps}> = ({storeKey, uiKey, props}) => {
   
   const dispatch = useAppDispatch()
-  const value = useSelector((state:RootState) => state.mission.item[uiKey])
-  const error = useSelector((state:RootState) => state.mission.errors[uiKey])
+  const value = useSelector((state:RootState) => state[storeKey].item[uiKey])
+  const error = useSelector((state:RootState) => state[storeKey].errors[uiKey])
 
   return (<>
     <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2">
